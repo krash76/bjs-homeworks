@@ -1,65 +1,49 @@
 "use strict";
 
-let a, b, c;
 function getResult(a, b, c) {
+  let x;
   let discr = b * b - 4 * a * c;
   if (discr > 0) {
-    var x1 = - b + Math.sqrt(discr) / (2 * a);
-    var x2 = - b - Math.sqrt(discr) / (2 * a);
-    var x = [x1, x2];
+    let x1 = - b + Math.sqrt(discr) / (2 * a);
+    let x2 = - b - Math.sqrt(discr) / (2 * a);
+    x = [x1, x2];
   }
-  else if (discr = 0) {
-    var x1 = - b / (2 * a);
-    var x = [x1]; 
+  else if (discr == 0) {
+    let x1 = - b / (2 * a);
+    x = [x1]; 
   }
   else {
-    var x = [];
-  };
+    x = [];
+  }
    
  return x;
 }
 
 
-let marks = [];
-let sum = 0;
 function getAverageMark(marks) {
-  if (marks.length > 0 && marks.length <= 5) {
+  let sum = 0;
+  if (marks.length == 0) {
+    return 0;
+  } 
+  else {
+    if (marks.length > 5) {
+    console.log("оценок больше 5ти");
+    marks = marks.slice(0, 5);
+    }
     for (let i = 0; i < marks.length; i++) {
     sum = sum + marks[i];
     }
-    var averageMark = sum / marks.length;
-    return averageMark;
-  } 
-  else if (marks.length > 5) {
-    console.log("оценок больше 5ти");
-    for (let i = 0; i < 5; i++) {
-    sum = sum + marks[i];
-    }
-    var averageMark = sum / 5;
-    return averageMark;
-  }
-  else {
-    return 0;
-  }
+  }  
+  let averageMark = sum / marks.length;
+  return averageMark;
 }  
 
 
-let name, dateOfBirthday;
-
 function askDrink(name, dateOfBirthday) {
-  var birthdayMonth = dateOfBirthday.getMonth();
-  var birthdayYear = dateOfBirthday.getFullYear();
+  const birthdayYear = dateOfBirthday.getFullYear();
   const today = new Date();
-  var todayMonth = today.getMonth(); 
-  var todayYear = today.getFullYear();
-
-  if (todayMonth >= birthdayMonth) {
-  var fullYears = todayYear - birthdayYear;
-  }
-  else {
-  var fullYears = todayYear - birthdayYear - 1;
-  }
-
+  const todayYear = today.getFullYear();
+  let fullYears = todayYear - birthdayYear;
   if (fullYears >= 18) {
   result = `Не желаете ли олд-фэшн, ${name}`;
   }
