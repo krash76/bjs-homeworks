@@ -50,78 +50,73 @@ function showSolutionsMessage(a, b, c) {
 //----Задача_3----// ПОЧЕМУ НЕ РАБОТАЕТ???
 
 function getPersonData(secretData) {
-  let aaa, bbb;
-  secretData = {
-    aaa,
-    bbb
-  };
-     
-  function getDecodedValue(secret) {
-    let x = secretData.aaa;
-    let y = secretData.bbb;
-    secret = [x, y];
+  //let aaa, bbb;
+  secretData = {};
+  let x = secretData.aaa;
+  let y = secretData.bbb;
+  let secret = [x, y];
     
-    if (secret[0] == 1)  {
-       decodedX = "Эмильо";
-    }
-    else {
-      decodedX = "Родриго";
-    }
-    if (secret[1] == 1)  {
-      decodedY = "Эмильо";
-    }
-    else {
-     decodedY = "Родриго";
-    }
-    let firstName = decodedX;
-    let lastName = decodedY;
-    let decoded = {
-      firstName ,
-      lastName 
-    };
-   
+  if (secret[0] === 1)  {
+     decodedX = "Эмильо";
+  }
+  else {
+    decodedX = "Родриго";
+  };
+
+  if (secret[1] === 1)  {
+    decodedY = "Эмильо";
+  }
+  else {
+    decodedY = "Родриго";
+  };
+    
+  let firstName = decodedX;
+  let lastName = decodedY;
+  let decoded = {
+    firstName ,
+    lastName 
+  }
+  
   return decoded;
-  }  
 }
+
  console.log(getPersonData({
  aaa: 1,
- bbb: 1
+ bbb: 0
 })); 
 
 
 
  //----Задача_2----//
 
-// function getAverageScore(data) {
-  //let subjects = [];
-  //let subject = subjects[i];
-  // let marks = [];
-    
-  // data = {
-    // subjects : marks
-  // }
-
-   
+function getAverageScore(data) {
+  let subjects = [];
+  let marks = [];
+  data = {
+    subjects : marks
+  }
  
-//  let sum = 0;
-//   function getAverageMark(marks) {
-//     for (let i = 0; i < marks.length; i++) {
-//      sum = sum + subject.marks[i];
-//      }
-//      let averageMark = sum / marks.length;
-//      return averageMark
-//     }
-//  }  
- //let arrayOfSubject = new Array [averageMark]; 
+  function getAverageMark(marks) {
+    let sum = 0;
+    for (let j = 0; j < subjects.length; j++) {
+      for (let i = 0; i < marks.length; i++) {
+      sum = sum + subject.marks[i];
+     }
+     let averageMark = sum / marks.length;
+    }
+     
+  } 
+  return (console.log(averageMark));
+} 
 
-  // console.log(getAverageScore ({
-  //   algebra : [2, 4, 5, 2, 3, 4],
-  //   geometry : [2, 4, 5],
-  //   russian : [3, 3, 4, 5],
-  //   physics : [5, 5],
-  //   music : [2, 2, 6],
-  //   english : [4, 4, 3],
-  //   poetry : [5, 3, 4],
-  //   chemistry : [2],
-  //   french : [4, 4]
-  // }));
+getAverageScore({
+  algebra : [2, 4, 5, 2, 3, 4],
+  geometry : [2, 4, 5],
+  russian : [3, 3, 4, 5],
+  physics : [5, 5],
+  music : [2, 2, 6],
+  english : [4, 4, 3],
+  poetry : [5, 3, 4],
+  chemistry : [2],
+  french : [4, 4]
+});
