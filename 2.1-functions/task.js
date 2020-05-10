@@ -62,29 +62,79 @@ function getPersonData(secretData) {
 })); 
 
 
- //----Задача_2----//
+ //----Задача_2----// 
+ // КОРОЧЕ НЕ ПОЛУЧИЛОСЬ... 
+ // ПОДСКАЖИТЕ
+ // 1) КАК ОБРАТИТЬСЯ СИНТАКСИЧЕСКИ К ОЦЕНКАМ ПО КАЖДОМУ ПРЕДМЕТУ, ЧТОБЫ НЕ ПИСАТЬ 9 РАЗ data.(предмет)???
+ // 2) КАК ПРАВИЛЬНО НАПИСАТЬ ЦИКЛ (for subjects of data), ЧТОБЫ ПОЛУЧИТЬ СРЕДНЮЮ ОЦЕНКУ ПО КАЖДОМУ ПРЕДМЕТУ???
+ 
+
 
 function getAverageScore(data) {
-  let subjects = [];
-  let marks = [];
- // data = {
-  //  subjects : marks
- // }
  
-  function getAverageMark(marks) {
-    let sum = 0;
-    for (let j = 0; j < subjects.length; j++) {
-      for (let i = 0; i < marks.length; i++) {
-      sum = sum + subject.marks[i];
-     }
-     let averageMark = sum / marks.length;
-    }
-     
-  } 
-  return (console.log(averageMark));
-} 
+    let sumAlgebra = 0, 
+    sumGeometry = 0, 
+    sumRussian = 0,
+    sumPhysics = 0,
+    sumMusic = 0,
+    sumEnglish = 0, 
+    sumPoetry = 0,
+    sumChemistry = 0,
+    sumFrench = 0;
 
-getAverageScore({
+    for (i= 0; i < data.algebra.length; i++) {
+      sumAlgebra += data.algebra[i];
+      averageAlgebra = sumAlgebra / data.algebra.length;
+    }
+    for (i= 0; i < data.geometry.length; i++) {
+      sumGeometry += data.geometry[i];
+      averageGeometry = sumGeometry / data.geometry.length;
+    }
+    for (i= 0; i < data.russian.length; i++) {
+      sumRussian += data.russian[i];
+      averageRussian = sumRussian / data.russian.length;
+    }
+    for (i= 0; i < data.physics.length; i++) {
+      sumPhysics += data.physics[i];
+      averagePhysics = sumPhysics / data.physics.length;
+    }
+   for (i= 0; i < data.music.length; i++) {
+      sumMusic += data.music[i];
+      averageMusic = sumMusic / data.music.length;
+    }
+    for (i= 0; i < data.english.length; i++) {
+      sumEnglish += data.english[i];
+      averageEnglish = sumEnglish / data.english.length;
+    }  
+    for (i= 0; i < data.poetry.length; i++) {
+      sumPoetry += data.poetry[i];
+      averagePoetry = sumPoetry / data.poetry.length;
+    }
+    for (i= 0; i < data.chemistry.length; i++) {
+      sumChemistry += data.chemistry[i];
+      averageChemistry = sumChemistry / data.chemistry.length;
+    }
+    for (i= 0; i < data.french.length; i++) {
+      sumFrench += data.french[i];
+      averageFrench = sumFrench / data.french.length;
+    }
+    
+    
+  return ({
+  algebra : averageAlgebra,
+  geometry : averageGeometry,
+  russian : averageRussian,
+  physics : averagePhysics,
+  music : averageMusic,
+  english : averageEnglish,
+  poetry : averagePoetry,
+  chemistry : averageChemistry,
+  french : averageFrench,
+  average : (averageAlgebra + averageGeometry + averageRussian + averagePhysics +  averageMusic + averageEnglish + averagePoetry + averageChemistry + averageFrench) / 9
+  })
+}
+
+console.log (getAverageScore({
   algebra : [2, 4, 5, 2, 3, 4],
   geometry : [2, 4, 5],
   russian : [3, 3, 4, 5],
@@ -94,4 +144,5 @@ getAverageScore({
   poetry : [5, 3, 4],
   chemistry : [2],
   french : [4, 4]
-});
+  }))
+
