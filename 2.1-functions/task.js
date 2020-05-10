@@ -47,44 +47,19 @@ function showSolutionsMessage(a, b, c) {
  showSolutionsMessage(7, 20, -3);
  showSolutionsMessage(2, 4, 2);
  
-//----Задача_3----// ПОЧЕМУ НЕ РАБОТАЕТ???
+//----Задача_3----// 
 
 function getPersonData(secretData) {
-  //let aaa, bbb;
-  secretData = {};
-  let x = secretData.aaa;
-  let y = secretData.bbb;
-  let secret = [x, y];
+  let decodedX = secretData.aaa ? 'Эмильо' : 'Родриго';
+  let decodedY = secretData.bbb ? 'Эмильо' : 'Родриго';
     
-  if (secret[0] === 1)  {
-     decodedX = "Эмильо";
-  }
-  else {
-    decodedX = "Родриго";
-  };
-
-  if (secret[1] === 1)  {
-    decodedY = "Эмильо";
-  }
-  else {
-    decodedY = "Родриго";
-  };
-    
-  let firstName = decodedX;
-  let lastName = decodedY;
-  let decoded = {
-    firstName ,
-    lastName 
-  }
-  
-  return decoded;
+  return {firstName: decodedX, lastName: decodedY}
 }
 
  console.log(getPersonData({
- aaa: 1,
+ aaa: 0,
  bbb: 0
 })); 
-
 
 
  //----Задача_2----//
@@ -92,9 +67,9 @@ function getPersonData(secretData) {
 function getAverageScore(data) {
   let subjects = [];
   let marks = [];
-  data = {
-    subjects : marks
-  }
+ // data = {
+  //  subjects : marks
+ // }
  
   function getAverageMark(marks) {
     let sum = 0;
