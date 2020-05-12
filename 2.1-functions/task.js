@@ -24,7 +24,6 @@ function showSolutionsMessage(a, b, c) {
   }
 
   let result = getSolutions(a, b, c);
-  //console.log(result, result.roots.length);
   let rootsResult;
   if (result.roots.length == 0 ) {
     rootsResult = 'Уравнение не имеет вещественных корней';
@@ -64,41 +63,39 @@ function getPersonData(secretData) {
 
 
  //----Задача_2----// 
-  
-function getAverageScore(data) {
 
-  function getAverageMark() {
-    let marksArray = [];
-    for (let subject in data) {
-    marksArray.push(data[subject]);
-    }
-    for (let i = 0; i < marksArray.length; i++) {
-      let sum = 0;
-      let marksOfSubject = marksArray[i];
-        for (let j = 0; j < marksOfSubject.length; j++) {
-        sum = sum + marksOfSubject[j];
-        }
-      let averageOfSubject = sum / marksOfSubject.length;
-      marksArray[i] = averageOfSubject;
-    }
-  return (marksArray);
+ function getAverageMark(marks) {
+  let sum = 0;
+  let averageMark;
+  for (let i = 0; i < marks.length; i++) {
+    sum = sum + marks[i];
   }
-
-let averageArray = getAverageMark();
-
-let sumOfAverage = 0;
-  for (let i = 0; i < averageArray.length; i++) {
-    sumOfAverage += averageArray[i]; 
-    for (let prop in data) {
-      data[prop] = averageArray[i]; //почему здесь на выходе значение у всех свойств(предметов) = 4, вместо средних из averageArray???
-    }
-  let average = sumOfAverage / averageArray.length;
-  data['average'] = average;
-  }
-return data
+return (averageMark =  sum / marks.length)
 }
 
-console.log (getAverageScore({
+function getAverageScore(data) {
+  let marksArray = [];
+  for (let subject in data) {
+    marksArray.push(data[subject]);
+    for (let i = 0; i < marksArray.length; i++) {
+      averageOfSubject = getAverageMark(marksArray[i]);
+    }
+  data[subject] = averageOfSubject;
+  }
+
+  let averagesArray = [];
+  for (let subject in data) { // это возможно как-то оптимизировать, чтобы не повторять строку 78???
+    averagesArray.push(data[subject]);
+    for (let i = 0; i < averagesArray.length; i++) {
+      average = getAverageMark(averagesArray);
+      }
+    data['average'] = average;
+  }
+
+  return (console.log(data))
+}
+
+getAverageScore({
   algebra : [2, 4, 5, 2, 3, 4],
   geometry : [2, 4, 5],
   russian : [3, 3, 4, 5],
@@ -108,75 +105,7 @@ console.log (getAverageScore({
   poetry : [5, 3, 4],
   chemistry : [2],
   french : [4, 4]
-  }))
-
-
-
-
-  //Задача_2_// длинный код
-// function getAverageScore(data) {
- 
-//     let sumAlgebra = 0, 
-//     sumGeometry = 0, 
-//     sumRussian = 0,
-//     sumPhysics = 0,
-//     sumMusic = 0,
-//     sumEnglish = 0, 
-//     sumPoetry = 0,
-//     sumChemistry = 0,
-//     sumFrench = 0;
-
-//     for (i= 0; i < data.algebra.length; i++) {
-//       sumAlgebra += data.algebra[i];
-//       averageAlgebra = sumAlgebra / data.algebra.length;
-//     }
-//     for (i= 0; i < data.geometry.length; i++) {
-//       sumGeometry += data.geometry[i];
-//       averageGeometry = sumGeometry / data.geometry.length;
-//     }
-//     for (i= 0; i < data.russian.length; i++) {
-//       sumRussian += data.russian[i];
-//       averageRussian = sumRussian / data.russian.length;
-//     }
-//     for (i= 0; i < data.physics.length; i++) {
-//       sumPhysics += data.physics[i];
-//       averagePhysics = sumPhysics / data.physics.length;
-//     }
-//    for (i= 0; i < data.music.length; i++) {
-//       sumMusic += data.music[i];
-//       averageMusic = sumMusic / data.music.length;
-//     }
-//     for (i= 0; i < data.english.length; i++) {
-//       sumEnglish += data.english[i];
-//       averageEnglish = sumEnglish / data.english.length;
-//     }  
-//     for (i= 0; i < data.poetry.length; i++) {
-//       sumPoetry += data.poetry[i];
-//       averagePoetry = sumPoetry / data.poetry.length;
-//     }
-//     for (i= 0; i < data.chemistry.length; i++) {
-//       sumChemistry += data.chemistry[i];
-//       averageChemistry = sumChemistry / data.chemistry.length;
-//     }
-//     for (i= 0; i < data.french.length; i++) {
-//       sumFrench += data.french[i];
-//       averageFrench = sumFrench / data.french.length;
-//     }
-    
-    
-//   return ({
-//   algebra : averageAlgebra,
-//   geometry : averageGeometry,
-//   russian : averageRussian,
-//   physics : averagePhysics,
-//   music : averageMusic,
-//   english : averageEnglish,
-//   poetry : averagePoetry,
-//   chemistry : averageChemistry,
-//   french : averageFrench,
-//   average : (averageAlgebra + averageGeometry + averageRussian + averagePhysics +  averageMusic + averageEnglish + averagePoetry + averageChemistry + averageFrench) / 9
-//   })
-// }
+  })
 
 
 
