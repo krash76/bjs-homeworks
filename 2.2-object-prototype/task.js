@@ -14,11 +14,13 @@ function getAverageMark(marks) {
       sum += Number(marks[i]);
       average =  sum / marks.length;
     }
-  
   return roundedAvarage = Math.round(average);
 }
 
 function checkBirthday(birthday) {
-    // код для задачи №3 писать здесь
-    // return verdict
+  const now = Date.now();
+  birthday = Number(new Date(birthday));
+  let diff = now - birthday;
+  age = diff / (365.25 * 24 * 60 * 60 * 1000); 
+  return ((age > 18) ? true : false)
 }
