@@ -1,7 +1,7 @@
 "use strict";
 
 function getResult(a, b, c) {
-  let x;
+  let x = [];
   let discr = b * b - 4 * a * c;
   if (discr > 0) {
     let x1 = - b + Math.sqrt(discr) / (2 * a);
@@ -12,10 +12,6 @@ function getResult(a, b, c) {
     let x1 = - b / (2 * a);
     x = [x1]; 
   }
-  else {
-    x = [];
-  }
-   
  return x;
 }
 
@@ -23,7 +19,7 @@ function getResult(a, b, c) {
 function getAverageMark(marks) {
   let sum = 0;
   if (marks.length == 0) {
-    return 0;
+  return 0;
   } 
   else {
     if (marks.length > 5) {
@@ -34,21 +30,23 @@ function getAverageMark(marks) {
     sum = sum + marks[i];
     }
   }  
-  let averageMark = sum / marks.length;
-  return averageMark;
+  //let averageMark = sum / marks.length;
+  return sum / marks.length;
 }  
 
 
 function askDrink(name, dateOfBirthday) {
-  const birthdayYear = dateOfBirthday.getFullYear();
-  const today = new Date();
-  const todayYear = today.getFullYear();
-  let fullYears = todayYear - birthdayYear;
+  let fullYears = new Date().getFullYear() - dateOfBirthday.getFullYear();
+  //в развернутом виде:
+  //const birthdayYear = dateOfBirthday.getFullYear();
+  //const today = new Date();
+  //const todayYear = today.getFullYear();
+  //let fullYears = todayYear - birthdayYear;
+  
   if (fullYears >= 18) {
-  result = `Не желаете ли олд-фэшн, ${name}`;
+  return `Не желаете ли олд-фэшн, ${name}`;
   }
   else {
-  result = `Сожалею, ${name}, но я не могу продать вам алкоголь. Зато могу предложить вам замечательный клюквенный компот!`;
+  return `Сожалею, ${name}, но я не могу продать вам алкоголь. Зато могу предложить вам замечательный клюквенный компот!`;
   }
-  return result; 
 }

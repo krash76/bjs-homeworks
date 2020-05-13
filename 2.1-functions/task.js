@@ -68,7 +68,7 @@ function getPersonData(secretData) {
   let sum = 0;
   let averageMark;
   for (let i = 0; i < marks.length; i++) {
-    sum = sum + marks[i];
+    sum += marks[i];
   }
 return (averageMark =  sum / marks.length)
 }

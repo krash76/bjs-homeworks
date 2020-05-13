@@ -1,11 +1,21 @@
 function getAnimalSound(animal) {
-    // код для задачи №1 писать здесь
-    // return animalSound;
+  if (animal === undefined) {
+    return null;
+  }
+  let sound = animal["sound"];
+    return sound;
 }
 
+
 function getAverageMark(marks) {
-    // код для задачи №2 писать здесь
-    // return averageMark
+  let sum = 0;
+  let average;
+    for (let i = 0; i < marks.length; i++) {
+      sum += Number(marks[i]);
+      average =  sum / marks.length;
+    }
+  
+  return roundedAvarage = Math.round(average);
 }
 
 function checkBirthday(birthday) {
