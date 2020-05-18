@@ -77,21 +77,12 @@ function getAverageScore(data) {
   let marksArray = [];
   for (let subject in data) {
     marksArray.push(data[subject]);
-    for (let i = 0; i < marksArray.length; i++) {
-      averageOfSubject = getAverageMark(marksArray[i]);
-    }
-  data[subject] = averageOfSubject;
+    data[subject] = getAverageMark(data[subject]); 
+    //значение свойства (subject) равно среднему значению, вычисляемому функцией getAverageMark, 
+    //где аргументом являются массивы оценок по каждому предмету. Круто!!! )
   }
-
-  let averagesArray = [];
-  for (let subject in data) { // это возможно как-то оптимизировать, чтобы не повторять строку 78???
-    averagesArray.push(data[subject]);
-    for (let i = 0; i < averagesArray.length; i++) {
-      average = getAverageMark(averagesArray);
-      }
-    data['average'] = average;
-  }
-
+  data['average'] = getAverageMark(Object.values(data));
+  //дополнительное свойство average получает среднее значение массива, состоящего из средних оценок по каждому предмету
   return (console.log(data))
 }
 
