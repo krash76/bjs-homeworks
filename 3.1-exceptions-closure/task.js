@@ -48,17 +48,18 @@ class Triangle {
 }
 
 function getTriangle (a, b, c) {
-    try {
-      const triangle = new Triangle ();
-      triangle.getArea();
-      triangle.getPerimeter();
+  try {
+    const triangle = new Triangle (a, b,c);
+    return triangle;
+  }
+  catch(formError) {
+    const triangle = new Triangle (a,b,c,);
+    triangle.getArea() = 'Ошибка! Неправильный треугольник';
+    triangle.getPerimeter() = 'Ошибка! Неправильный треугольник';
+    return triangle;
     }
-    catch(formError) {
-      return (
-        triangle.getArea() = 'Ошибка! Неправильный треугольник',
-        triangle.getPerimeter() = 'Ошибка! Неправильный треугольник'
-      )
-    }
+   
 }
+
 
  
