@@ -1,15 +1,16 @@
 //Задачи 1,2 - функции в консоли выполняются, почему не проходит тестирование?
 
+//obj = {name, attack, durability, range}
 class Weapon {
   constructor(obj) {
     this.name = obj.name;
     this.attack = obj.attack;
-    this.initialDurability = obj.initialDurability;
+    this.initialDurability =obj.durability;
     this.durability = obj.durability;
     this.range = obj.range;
   }
   takeDamage(damage) {
-    return (this.durability > 0 ? this.durability -= 1 : this.durability = 0);
+    return (this.durability > 0 ? this.durability -= damage : this.durability = 0);
   }
   getDamage() {
     if (this.durability <= 0) {
@@ -25,96 +26,105 @@ class Weapon {
   }
 }
 
-const arm = new Weapon ({
-  name: 'Рука', 
-  attack: 1,
-  initialDurability: Infinity,
-  durability: Infinity, 
-  range: 1, 
-})
-
-const knife = new Weapon ({
-  name: 'Нож', 
-  attack: 5, 
-  initialDurability: 300,
-  durability: 300,
-  range: 1, 
-});
+class Arm extends Weapon {
+  constructor() {
+    super ({
+      name:'Рука',
+      attack: 1,
+      durability: Infinity,
+      range: 1,
+    })
+  }
+}
+const arm = new Arm ();
+// arm.takeDamage(20);
+// console.log (arm.name, arm.attack, arm.durability,arm.initialDurability, arm.range);
+// console.log (arm.getDamage(), arm.isBroken());
 
 class Bow extends Weapon {
-  constructor(obj) {
-    super(obj)
+  constructor() {
+    super({
+      name:'Лук',
+      attack: 10,
+      durability: 200,
+      range: 3,
+    })
   }
 }
+const bow = new Bow ();
+// bow.takeDamage(20);
+// console.log (bow.name, bow.attack, bow.initialDurability, bow.durability, bow.range);
+
+class LongBow extends Bow {
+  constructor(durability) {
+    super(durability);
+    this.name = 'Длинный лук';
+    this.attack = 15;
+    this.range = 4;
+  }
+}
+const longBow = new LongBow ();
+// console.log (longBow.name, longBow.attack, longBow.durability, longBow.range)
+
 
 class Sword extends Weapon {
-  constructor(obj) {
-    super(obj);
+  constructor() {
+    super({
+      name: 'Меч',
+      attack: 25,
+      durability: 500,
+      range: 1,
+    })
   }
 }
+const sword = new Sword ();
+
+
+class Axe extends Sword {
+  constructor(range) {
+    super(range);
+    this.name = 'Секира'; 
+    this.attack = 27; 
+    this.durability = 800;
+  }
+}
+const axe = new Axe ();
+// console.log (axe.name, axe.attack, axe.durability, axe.range)
+
+class Knife extends Weapon {
+  constructor() {
+    super({
+      name: 'Нож',
+      attack: 5,
+      durability: 300,
+      range: 1,
+    })
+  }
+}
+const knife = new Knife ();
 
 class Staff extends Weapon {
-  constructor(obj) {
-    super(obj);
+  constructor() {
+    super({
+      name: 'Посох', 
+      attack: 8, 
+      durability: 300,
+      range: 2, 
+    })
   }
 } 
+const staff = new Staff ();
 
-const bow = new Bow ({
-  name: 'Лук', 
-  attack: 10, 
-  initialDurability: 200,
-  durability: 200,
-  range: 3, 
-})
+class StormStaff extends Staff {
+  constructor(durability) {
+    super(durability);
+    this.name = 'Посох Бури'; 
+    this.attack = 10; 
+    this.range = 3;
+  }
+}
+const stormStaff = new StormStaff();
 
-const longBow = new Bow ({
-  name: 'Длинный лук', 
-  attack: 15, 
-  initialDurability: 200,
-  durability: 200,
-  range: 4, 
-})
-
-const sword = new Sword ({
-  name: 'Меч', 
-  attack: 25, 
-  initialDurability: 500,
-  durability: 500,
-  range: 1, 
-});
-
-const axe = new Sword ({
-  name: 'Секира', 
-  attack: 27, 
-  initialDurability: 800,
-  durability: 800,
-  range: 1, 
-});
-
-const staff = new Staff ({
-  name: 'Посох', 
-  attack: 8, 
-  initialDurability: 300,
-  durability: 300,
-  range: 1, 
-});
-
-const stormStaff = new Staff ({
-  name: 'Посох', 
-  attack: 8, 
-  initialDurability: 300,
-  durability: 300,
-  range: 1, 
-});
-
-//longBow.takeDamage(20);
-// console.log (longBow.durability, longBow.getDamage(), longBow.isBroken());
-// axe.takeDamage(400);
-// console.log (axe.durability, axe.getDamage(), axe.isBroken());
-// staff.takeDamage(100);
-// console.log (staff.durability, staff.getDamage(), staff.isBroken());
-// arm.takeDamage(20);
-// console.log (arm.durability, arm.getDamage(), arm.isBroken());
 
 
 
