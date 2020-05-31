@@ -138,9 +138,8 @@ class StudentLog {
   }
 
   addGrade(grade, subject) {
-      
     if (typeof grade !== 'number' || grade < 1 || grade > 5) {
-       return (console.log (`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`))
+      return (console.log (`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`))
     } 
     
     if (subject in this.register === false) {
@@ -153,9 +152,8 @@ class StudentLog {
   }
 
   getAverageBySubject(subject) {
-    
     if (subject in this.register === false) {
-    return 0;
+      return 0;
     }
     let subjectLength = this.register[subject].length;
     let sum = 0;
