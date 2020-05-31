@@ -19,7 +19,7 @@ class Weapon {
     else if (this.durability >= (this.initialDurability * 0.3)) {
       return this.attack;
       } 
-    return (this.attack = this.attack / 2)
+    return (this.attack / 2)
   }
   isBroken() {
     return (this.durability > 0 ? false : true)
@@ -127,50 +127,71 @@ const stormStaff = new StormStaff();
 
 //Задача 3 
 
-//вопрос: что сделать, чтобы register был единым, а не создавался каждый раз новый (((?
-//получен ответ: создайте его в конструкторе
-// вопрос: А разве он не в конструкторе сейчас? addGrade - метод, написанный внутри конструктора 
-
 class StudentLog {
   constructor(name) {
     this.name = name;
+    this.register = {};
   }
-
+  
   getName () {
     return this.name;
   }
 
   addGrade(grade, subject) {
-   
+      
     if (typeof grade !== 'number' || grade < 1 || grade > 5) {
-      return (console.log (`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`))
+       return (console.log (`Вы пытались поставить оценку ${grade} по предмету ${subject}. Допускаются только числа от 1 до 5.`))
     } 
-    const register = new Object();
-      if (register[subject] !== subject) {
-        register[subject] = [];
-        register[subject].push(grade);
-      }
-      register[subject].push(grade);
-      return (console.log (register));
+    
+    if (subject in this.register === false) {
+      this.register[subject] = [];
+      this.register[subject].push(grade);
+      return (this.register[subject].length);
+    }
+    this.register[subject].push(grade);
+    return (this.register[subject].length);
+  }
+
+  getAverageBySubject(subject) {
+    
+    if (subject in this.register === false) {
+    return 0;
+    }
+    let subjectLength = this.register[subject].length;
+    let sum = 0;
+    for (let i = 0; i < subjectLength; i++) {
+      sum += this.register[subject][i];
+    }
+    return (sum / subjectLength);
+  }
+
+  getTotalAverage() {
+    let averagesArray = [];
+    for (let subject in this.register) {
+      this.register[subject] = this.getAverageBySubject(subject);
+      averagesArray.push(this.register[subject]);
+    }
+    let sum = 0;
+    for (let i = 0; i < averagesArray.length; i++) {
+      sum += averagesArray[i];
+    }
+    return (sum / averagesArray.length);
   }
 }    
     
 const log = new StudentLog('Олег Никифоров');
 
 console.log(log.getName());
-log.addGrade(3, 'algebra');
+log.addGrade('отлично!', 'math');
+log.addGrade(25, 'geometry');
+log.addGrade(2, 'algebra');
 log.addGrade(4, 'algebra');
-// log.addGrade('отлично!', 'math');
-//log.addGrade(5, 'geometry');
-// log.addGrade(25, 'geometry');
-// log.addGrade(3, 'geometry');
+log.addGrade(5, 'geometry');
+log.addGrade(4, 'geometry');
 
-
+console.log(log.getAverageBySubject('algebra'));
+console.log(log.getAverageBySubject('geometry'));
+console.log(log.getAverageBySubject('math'));
   
+console.log(log.getTotalAverage());
 
-// console.log(log.addGrade(3, 'algebra'));
-// console.log(log.addGrade(4, 'algebra'));
-// console.log(log.addGrade('отлично!', 'math'));
-// console.log(log.addGrade(5, 'geometry'));
-// console.log(log.addGrade(25, 'geometry'));
-// console.log(log.addGrade(3, 'geometry'));
