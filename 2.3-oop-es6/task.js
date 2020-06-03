@@ -165,9 +165,10 @@ class StudentLog {
 
   getTotalAverage() {
     let averagesArray = [];
-    for (let subject in this.register) {
-      this.register[subject] = this.getAverageBySubject(subject);
-      averagesArray.push(this.register[subject]);
+    let newRegister = this.register;
+    for (let subject in newRegister) {
+      newRegister[subject] = this.getAverageBySubject(subject);
+      averagesArray.push(newRegister[subject]);
     }
     let sum = 0;
     for (let i = 0; i < averagesArray.length; i++) {
@@ -193,3 +194,16 @@ console.log(log.getAverageBySubject('math'));
   
 console.log(log.getTotalAverage());
 
+const log2 = new StudentLog('Вася Пупкин');
+console.log(log2.getName());
+log2.addGrade(5, 'algebra');
+log2.addGrade(3, 'algebra');
+log2.addGrade(3, 'geometry');
+log2.addGrade(3, 'geometry');
+log2.addGrade(4, 'math');
+
+console.log(log2.getAverageBySubject('algebra'));
+console.log(log2.getAverageBySubject('geometry'));
+console.log(log2.getAverageBySubject('math'));
+  
+console.log(log2.getTotalAverage());
