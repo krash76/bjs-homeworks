@@ -165,12 +165,6 @@ class StudentLog {
 
   getTotalAverage() {
     let averagesArray = [];
-    //let newRegister = this.register;
-    // for (let subject in newRegister) {
-    //   newRegister[subject] = this.getAverageBySubject(subject);
-    //   averagesArray.push(newRegister[subject]);
-    // }
-    
     for (let subject in this.register) {
       averagesArray[subject] = this.getAverageBySubject(subject);
       averagesArray.push(averagesArray[subject]);
