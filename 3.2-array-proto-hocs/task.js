@@ -5,7 +5,7 @@ function sleep(milliseconds) {
 }
 
 function sum(...args) {
-  sleep(1800);
+  sleep(500);
   return args.reduce((sum, arg) => {
   return sum += arg;}, 0)
 }
@@ -16,32 +16,21 @@ function compareArrays(arr1, arr2) {
 
 function memorize(fn, limit) {
   let memory = [];
-  
-  
-
+ 
   return function (...args) {
     let newMemoryElement = {};
     newMemoryElement['args'] = args;
-   
-    controlElement = (memoryElement) => {
-      return compareArrays(memoryElement.args, newMemoryElement.args);
-    }
-
-    if (memory.find(controlElement) !== undefined) {
-      //return (console.log (memoryElement.result, 'РЕЗУЛЬТАТ БЕРЕТСЯ ИЗ ПАМЯТИ')) 
-      // почему при таком коде memoryElement.result = undefined?
-      return (
-        //console.log убрала для тестирования
-         (newMemoryElement['result'] = fn(...args), 'РЕЗУЛЬТАТ БЕРЕТСЯ ИЗ ПАМЯТИ'));
-    } else {
+    let findResult = memory.find((memoryElement) => 
+      compareArrays(memoryElement.args, newMemoryElement.args));
+      if (findResult !== undefined ) {
+        return (console.log(findResult.result, 'РЕЗУЛЬТАТ БЕРЕТСЯ ИЗ ПАМЯТИ')); 
+      } else {
       newMemoryElement['result'] = fn(...args);
       memory.push(newMemoryElement);
       if (memory.length > limit) {
         memory.shift();
       }
-      return (
-        //console.log убрала для тестирования
-        (memory, newMemoryElement.result, 'ФУНКЦИЯ ВЫЗВАНА НЕ ИЗ ПАМЯТИ'));
+      return (console.log(newMemoryElement.result, 'ФУНКЦИЯ ВЫЗВАНА НЕ ИЗ ПАМЯТИ'));
     }
   }
 }
@@ -49,26 +38,25 @@ function memorize(fn, limit) {
 function testCase(testFunction, counter) {
   const arrayArgs = ([ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ]);
   let argOfArgs = [...arrayArgs];
-  testFunction(...argOfArgs);
   console.time(counter);
   for (i = 0; i <= 10; i++) {
-    arrayArgs.forEach(arg => testFunction(arg));
+    argOfArgs.forEach(arg => testFunction.apply(null, arg));
   }
   return (console.timeEnd(counter));
 }
 
 
-const mSum = memorize(sum, 5);
+//const mSum = memorize(sum, 10);
   // mSum(3,4,5)
   // mSum(1,2)
   // mSum(3,4,5)
   // mSum(1,3,2)
+  // mSum(1,2)
+
 testCase(sum, 'counter'); 
-//counter: 99058мс (sleep ON),  counter: 99057мс (sleep OFF), 
-testCase(mSum, 'counter');
-//counter: 99056мс (sleep ON),  counter: 99055мс (sleep OFF), 
+//counter: 27556мс(sleep ON),  counter: 1-3мс (sleep OFF), 
+//testCase(mSum, 'counter');
+//counter: 1505мс (sleep ON),  counter: 2-3мс (sleep OFF), 
 
 
-//console.log(compareArrays([8, 1, 2], [8, 1, 2]));
-//console.log(compareArrays([1, 2, 3], [3, 2, 1]));
  
