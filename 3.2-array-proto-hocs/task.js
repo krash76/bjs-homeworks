@@ -23,14 +23,14 @@ function memorize(fn, limit) {
     let findResult = memory.find((memoryElement) => 
       compareArrays(memoryElement.args, newMemoryElement.args));
       if (findResult !== undefined ) {
-        return (console.log(findResult.result, 'РЕЗУЛЬТАТ БЕРЕТСЯ ИЗ ПАМЯТИ')); 
+        return (findResult.result);// 'РЕЗУЛЬТАТ БЕРЕТСЯ ИЗ ПАМЯТИ')); 
       } else {
       newMemoryElement['result'] = fn(...args);
       memory.push(newMemoryElement);
       if (memory.length > limit) {
         memory.shift();
       }
-      return (console.log(newMemoryElement.result, 'ФУНКЦИЯ ВЫЗВАНА НЕ ИЗ ПАМЯТИ'));
+      return (newMemoryElement.result); // 'ФУНКЦИЯ ВЫЗВАНА НЕ ИЗ ПАМЯТИ'));
     }
   }
 }
@@ -46,17 +46,18 @@ function testCase(testFunction, counter) {
 }
 
 
-//const mSum = memorize(sum, 10);
-  // mSum(3,4,5)
-  // mSum(1,2)
-  // mSum(3,4,5)
-  // mSum(1,3,2)
-  // mSum(1,2)
+const mSum = memorize(sum, 10);
+//  console. log (mSum(1,2,3))
+//  console. log (mSum(1,2,3))
+//  console. log (mSum(1,2,3))
+//  console. log (mSum(3,4,5))
+//  console. log  (mSum(1,3,2))
+//  console. log ( mSum(1,2))
 
-testCase(sum, 'counter'); 
+//testCase(sum, 'counter'); 
 //counter: 27556мс(sleep ON),  counter: 1-3мс (sleep OFF), 
-//testCase(mSum, 'counter');
-//counter: 1505мс (sleep ON),  counter: 2-3мс (sleep OFF), 
+testCase(mSum, 'counter');
+//counter: 1505мс (sleep ON),  counter: 2-4мс (sleep OFF), 
 
 
  
