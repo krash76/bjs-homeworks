@@ -21,69 +21,77 @@ class AlarmClock {
         alarmToCollect['id'] = id;
         this.alarmCollection.push(alarmToCollect);
       }
-      return (console.log(this.alarmCollection)) ; 
+      return (this.alarmCollection) ; 
     }
   }
 
   removeClock(id) {
-   let controlId = this.alarmCollection.filter((alarm) => alarm.id !== id);
-    if (controlId.length !== this.alarmCollection.length) {
-      return (console.log ('звонок с данным id успешно удален') );
+   let newAlarmCollection = this.alarmCollection.filter((alarm) => alarm.id !== id);
+    if (newAlarmCollection.length !== this.alarmCollection.length) {
+      this.alarmCollection = newAlarmCollection;
+      return (console.log (true));
     } else {
-      return (console.log ('звонков с данным id не найдено') )
+      return (console.log (false))
     }
   }
 
   getCurrentFormattedTime() {
     let today = new Date();
-    return (today.getHours() + ":" + today.getMinutes());
+    let currentHours;
+    let currentMinutes;
+    if (today.getHours() < 10) {
+      currentHours = '0' + today.getHours()
+    } else {
+      currentHours = today.getHours();
+    }
+    if (today.getMinutes() < 10) {
+      currentMinutes = '0' + today.getMinutes()
+    } else {
+      currentMinutes = today.getMinutes();
+    }
+    return (currentHours + ":" + currentMinutes);
   }
   
-  //  не могу checkClock написать корректно(((
   start() {
 
-    this.alarmCollection.forEach((alarm) => { 
-      function checkClock(alarm) { 
-      if (this.getCurrentFormattedTime() === alarm.time) {
-         alarm.callback();
-       }
+    const checkClock = () => { 
+      this.alarmCollection.forEach((alarm) => { 
+        if (this.getCurrentFormattedTime() === alarm.time) {
+          alarm.callback();
+        }
+      })
     }
-  })
-    
+        
     if (this.timerId === undefined) {
       const controlAlarm = () =>  checkClock();
       this.timerId = setInterval(controlAlarm, 1000);
     } 
   }
 
-
   stop() {
-    if (this.timerId !== undefined) {clearInterval(timerId);
+    if (this.timerId !== undefined) {clearInterval(this.timerId);
     }
   }
 
   printAlarms() {
-    this.alarmCollection.forEach((alarm) => {window.print('будильник № ${alarm.id} заведен на ${alarm.time}')});
+    this.alarmCollection.forEach(alarm => (console.log(`будильник № ${alarm.id} заведен на ${alarm.time}`)));
   }
 
   clearAlarms() {
-    clearInterval(timerId);
-    this.alarmCollection.forEach(alarm => alarmCollection.shift(alarm));
+    clearInterval(this.timerId);
+    this.alarmCollection.forEach(alarm => this.alarmCollection.shift(alarm));
   }
 }
 
-
-
-//function testCase() {
+const testCase = () => {
   let firstAlarm = new AlarmClock();
-  //console.log(firstAlarm.getCurrentFormattedTime());
-firstAlarm.addClock('21:23', () => console.log ("пора вставать",  ), 1);
+  firstAlarm.addClock('12:05', () => console.log ("пора вставать"), 1);
+  firstAlarm.addClock('12:06', () => { console.log ("Давай, вставай уже!"); firstAlarm.removeClock(2)}, 2);
+  //firstAlarm.addClock('12:06', () => console.log ("Иди умываться!"));
+  firstAlarm.addClock('12:07', () => { console.log ("Вставай, а то проспишь!"); firstAlarm.clearAlarms(); firstAlarm.printAlarms();}, 3);
+  firstAlarm.addClock('12:08', () => console.log ("Вставай, а то проспишь!"), 1);
+  firstAlarm.printAlarms();
+  firstAlarm.start();
+}
 
-firstAlarm.start();
-// firstAlarm.addClock('16:34', () => { console.log ("Давай, вставай уже!"); firstAlarm.removeClock(2)}, 2);
-// firstAlarm.addClock('16:34', () => console.log ("Иди умываться!"));
-// firstAlarm.addClock('16:35', () => { console.log ("Вставай, а то проспишь!"); firstAlarm.clearalarms(); firstAlarm.printAlarms();}, 3);
-// firstAlarm.addClock('16:36', () => console.log ("Вставай, а то проспишь!"), 1);
-//firstAlarm.printAlarms();
-//firstAlarm.start();
-//}
+testCase();
